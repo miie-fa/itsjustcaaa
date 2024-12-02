@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Typing Animation</title>
+    <link rel="stylesheet" href="/src/style.scss">
+</head>
+<body>
+    <div class="container">
+        <div class="typing-container">
+            <div id="typing-text" class="typing-text"></div>
+        </div>
+        <div id="cta-button" class="cta-button hidden">Buka Surat</div>
+    </div>
+    <script>
+        class TypingAnimation {
+    constructor() {
+        this.typingText = document.getElementById('typing-text');
+        this.ctaButton = document.getElementById('cta-button');
+        
+        this.messages = [
+            `Kepada Seseorang yang Spesial,
+
+Dalam setiap detak waktu,
+Ku selalu memikirkanmu.
+Cinta ini tak kan pernah pudar,
+Selamanya akan ku jaga.
+
+Sepenuh hati,
+Sang Pencinta`,
+
+            `Hai Kamu,
+
+Surat ini adalah bukti 
+bahwa perasaanku padamu 
+begitu tulus dan mendalam.
+
+Selalu setia,
+Dirimu`,
+
+            `Catatan Terakhir,
+
+Perjalanan cinta kita 
+penuh dengan kenangan indah.
+Tak ada yang bisa 
+menggantikan dirimu.
+
+Selamanya milikmu,
+Sang Pengharap`
+        ];
+
+        this.currentMessageIndex = 0;
+        this.init();
+    }
+
+    init() {
+        this.startTypingAnimation();
+        this.ctaButton.addEventListener('click', () => this.handleCtaClick());
+    }
+
+    startTypingAnimation() {
+        // Reset text
+        this.typingText.textContent = '';
+        
+        const message = this.messages[this.currentMessageIndex];
+        let index = 0;
+        
+        const type = () => {
+            if (index < message.length) {
+                this.typingText.textContent += message.charAt(index);
+                index++;
+                
+                // Random typing speed untuk kesan natural
+                const speed = Math.random() * 50 + 30;
+                setTimeout(type, speed);
+            } else {
+                // Setelah selesai mengetik, tampilkan tombol
+                this.showCtaButton();
+            }
+        };
+
+        type();
+    }
+
+    showCtaButton() {
+        // Hapus kelas hidden
+        this.ctaButton.classList.remove('hidden');
+        
+        // Tambahkan animasi fade in
+        this.ctaButton.classList.add('fade-in');
+    }
+
+    handleCtaClick() {
+        // Ganti pesan jika tombol diklik
+        this.currentMessageIndex = 
+            (this.currentMessageIndex + 1) % this.messages.length;
+        
+        // Sembunyikan tombol
+        this.ctaButton.classList.remove('fade-in');
+        this.ctaButton.classList.add('hidden');
+        
+        // Mulai animasi typing ulang
+        this.startTypingAnimation();
+    }
+}
+
+// Inisialisasi ketika DOM sudah dimuat
+document.addEventListener('DOMContentLoaded', () => {
+    new TypingAnimation();
+});
+    </script>
+</body>
+</html>

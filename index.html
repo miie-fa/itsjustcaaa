@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Good for you</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Dongle', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .gradient-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1; /* Pastikan latar belakang di belakang elemen lain */
+      }
+
+      .pin-container {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      #pin-display {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      #buttons {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .pin-button {
+        padding: 20px;
+        font-size: 24px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.7);
+        transition: background-color 0.3s;
+      }
+
+      .pin-button:hover {
+        background-color: rgba(255, 255, 255, 1);
+      }
+
+      .indicator {
+        margin-top: 20px;
+        font-size: 20px;
+        color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="gradient-bg">
+      <svg xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo" />
+            <feBlend in="SourceGraphic" in2="goo" />
+          </filter>
+        </defs>
+      </svg>
+      <div class="gradients-container">
+        <div class="g1"></div>
+        <div class="g2"></div>
+        <div class="g3"></div>
+        <div class="g4"></div>
+        <div class="g5"></div>
+        <div class="interactive"></div>
+      </div>
+    </div>
+
+    <div class="pin-container">
+      <div id="pin-display">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <div id="buttons">
+        <button class="pin-button" data-value="1">1</button>
+        <button class="pin-button" data-value="2">2</button>
+        <button class="pin-button" data-value="3">3</button>
+        <button class="pin-button" data-value="4">4</button>
+        <button class="pin-button" data-value="5">5</button>
+        <button class="pin-button" data-value="6">6</button>
+        <button class="pin-button" data-value="7">7</button>
+        <button class="pin-button" data-value="8">8</button>
+        <button class="pin-button" data-value="9">9</button>
+        <button class="pin-button" data-value="0" style="grid-column: 2;">0</button>
+      </div>
+      <div class="indicator" id="indicator"></div>
+    </div>
+    <div id="error-message" class="error-message"></div> <!-- Pesan kesalahan -->
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
